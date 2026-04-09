@@ -583,7 +583,7 @@ function writeUniformsForObject(obj: SceneObject, model: Mat4, view: Mat4, proj:
   const [or, og, ob] = hexToRgb(obj.material.objectColor);
   const [lr, lg, lb] = hexToRgb(gui.lightColor);
   const [wr, wg, wb] = hexToRgb(gui.wireColor);
-  const lightPos: Vec3 = [camPos[0], camPos[1] + 2.0, camPos[2] + 1.0];
+  const lightPos: Vec3 = [3, 3, 3];
 
   uniformF32.set(mvp, 0);
   uniformF32.set(model, 16);
@@ -609,9 +609,9 @@ function writeUniformsForObject(obj: SceneObject, model: Mat4, view: Mat4, proj:
   uniformF32[62] = lb;
   uniformF32[63] = 0;
 
-  uniformF32[64] = obj.material.ambient;
-  uniformF32[65] = obj.material.diffuse;
-  uniformF32[66] = obj.material.specular;
+  uniformF32[64] = gui.lightAmbient * gui.lightIntensity;
+  uniformF32[65] = gui.lightDiffuse * gui.lightIntensity;
+  uniformF32[66] = gui.lightSpecular * gui.lightIntensity;
   uniformF32[67] = obj.material.shininess;
 
   uniformF32[68] = modeToShading(gui.pipelineMode);
