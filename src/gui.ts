@@ -34,6 +34,10 @@ export const gui = {
   wireOpacity: 1.0,
   wireThickness: 1.0,
   wireHiddenSurface: true,
+  lightAmbient: 0.2,
+  lightDiffuse: 0.8,
+  lightSpecular: 0.5,
+  lightIntensity: 1.0,
 };
 
 export function hexToRgb(hex: string): [number, number, number] {
@@ -145,8 +149,12 @@ export function initGUI(callbacks: {
       </div>
 
       <div class="gui-section">
-        <div class="gui-label">Global Light Color</div>
+        <div class="gui-label">Global Light</div>
         <div class="color-row"><span>Light</span><input type="color" id="lightColor" value="#ffffff"></div>
+        ${slider("lightAmbient", "Ambient", 0, 1, 0.01, 0.2)}
+        ${slider("lightDiffuse", "Diffuse", 0, 1, 0.01, 0.8)}
+        ${slider("lightSpecular", "Specular", 0, 1, 0.01, 0.5)}
+        ${slider("lightIntensity", "Intensity", 0.1, 2.0, 0.1, 1.0)}
       </div>
 
       <div class="gui-section">
@@ -224,6 +232,11 @@ export function initGUI(callbacks: {
   bindSlider("wireIntensity", v => { gui.wireIntensity = v; });
   bindSlider("wireOpacity", v => { gui.wireOpacity = v; });
   bindSlider("wireThickness", v => { gui.wireThickness = v; });
+
+  bindSlider("lightAmbient", v => { gui.lightAmbient = v; });
+  bindSlider("lightDiffuse", v => { gui.lightDiffuse = v; });
+  bindSlider("lightSpecular", v => { gui.lightSpecular = v; });
+  bindSlider("lightIntensity", v => { gui.lightIntensity = v; });
 
   (document.getElementById("objectColor") as HTMLInputElement)
     .addEventListener("input", e => callbacks.onMaterialChange({ objectColor: (e.target as HTMLInputElement).value }));
