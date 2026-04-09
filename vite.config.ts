@@ -1,5 +1,5 @@
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  base: "/illumination_students/",
+  base: "/MODELADO_PARCIAL_2_IAN_FLORES/",
 });
